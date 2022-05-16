@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     //MyAdapter myadapter;
     TextView currencyText,cryptoText,goldText;
     private  OkHttpClient client = new OkHttpClient();
-    private final String BASE_URL = "https://finans.apipara.com/json/v9//converter";
+    private final String BASE_URL = "http://mkiziltay.epizy.com/jsonsample.php?i=1"; // throwing SSL Error. if u use api source with https project works.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
