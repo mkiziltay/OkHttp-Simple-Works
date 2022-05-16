@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.fragment.okhttp.Model.Currency;
+import com.fragment.okhttp.Model.Money;
 import com.fragment.okhttp.R;
 
 import java.text.DecimalFormat;
@@ -16,9 +17,9 @@ import java.util.ArrayList;
 public class MyAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<Currency> currList;
+    ArrayList<Money> currList;
 
-    public MyAdapter(Context context, ArrayList<Currency> currList) {
+    public MyAdapter(Context context, ArrayList<Money> currList) {
         this.context = context;
         this.currList = currList;
     }
@@ -49,10 +50,9 @@ public class MyAdapter extends BaseAdapter {
         changing = convertView.findViewById(R.id.changing);
 
         title.setText(currList.get(position).getCurrencyName());
-        buying.setText(new DecimalFormat("#0.0000").format(currList.get(position).getCurrencyBuy()));
-        selling.setText(new DecimalFormat("#0.0000").format(currList.get(position).getCurrencySelling()));
-//        changing.setText(currList.get(position).getGetCurrencyChange().toString());
-        changing.setText(new DecimalFormat("#0.0000").format(currList.get(position).getGetCurrencyChange()));
+        buying.setText(formatValue(currList.get(position).getCurrencyBuy()));
+        selling.setText(formatValue(currList.get(position).getCurrencySelling()));
+        changing.setText(formatValue(currList.get(position).getGetCurrencyChange()));
 
         if (currList.get(position).getGetCurrencyChange()<0){
             changing.setTextColor(Color.RED);
@@ -68,5 +68,18 @@ public class MyAdapter extends BaseAdapter {
 
     void listeners(View view, TextView value, int pos){
 
+    }
+
+    String formatValue(Double value){
+        String newValue="1.0";
+        if(value<1000){
+            newValue = new DecimalFormat("#0.0000").format(value);
+        }else if(value<100000){
+            newValue = new DecimalFormat("#0.00").format(value);
+        }else{
+            newValue = new DecimalFormat("#0").format(value);
+        }
+
+        return newValue;
     }
 }

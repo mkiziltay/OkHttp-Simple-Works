@@ -3,15 +3,29 @@ package com.fragment.okhttp.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.ListFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 
+import com.fragment.okhttp.Adapters.MyAdapter;
+import com.fragment.okhttp.MainActivity;
+import com.fragment.okhttp.Model.Currency;
+import com.fragment.okhttp.Model.Money;
 import com.fragment.okhttp.R;
 
-public class CurrenciesFrgmnt extends Fragment {
+import java.util.ArrayList;
 
+public class CurrenciesFrgmnt extends Fragment {
+    private static ArrayList<Money> currencyList;
+    View frgView;
+    ListView listView;
+    MyAdapter myAdapter;
+/*
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -36,16 +50,38 @@ public class CurrenciesFrgmnt extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+       if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+    }
+*/
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        frgView = inflater.inflate(R.layout.fragment_currencies, container, false);
+
+        configureListView();
+        //container.addView(listView);
+        return frgView;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_currencies, container, false);
+    public static void setData(ArrayList<Money> arrayList){
+        //currencyList = new ArrayList<>();
+        currencyList = arrayList;
+    }
+
+    public ArrayList<Money> getData(){
+        return currencyList;
+    }
+
+    public void configureListView() {
+        listView=frgView.findViewById(R.id.listview);
+        myAdapter = new MyAdapter(getActivity().getApplicationContext(), getData());
+        listView.setAdapter(myAdapter);
+        myAdapter.notifyDataSetChanged();
+        Log.i("data", "LIST VIEW HAS BEEN BUILT RIGHT NOW");
+        Log.i("data", getData().get(4).getCurrencyName());
     }
 }

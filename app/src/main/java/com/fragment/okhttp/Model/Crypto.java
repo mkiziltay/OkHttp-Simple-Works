@@ -1,13 +1,13 @@
 package com.fragment.okhttp.Model;
 
-public class Currency extends Money{
+public class Crypto extends Money{
     private int id;
     private String currencyName;
     private Double currencyBuy;
     private Double currencySelling;
     private Double getCurrencyChange;
 
-    public Currency(int id, String currencyName, Double currencyBuy, Double currencySelling, Double getCurrencyChange) {
+    public Crypto(int id, String currencyName, Double currencyBuy, Double currencySelling, Double getCurrencyChange) {
         this.id = id;
         this.currencyName = currencyName;
         this.currencyBuy = currencyBuy;
