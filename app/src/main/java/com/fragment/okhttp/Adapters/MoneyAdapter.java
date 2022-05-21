@@ -7,19 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.fragment.okhttp.Model.Currency;
 import com.fragment.okhttp.Model.Money;
 import com.fragment.okhttp.R;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class MyAdapter extends BaseAdapter {
+public class MoneyAdapter extends BaseAdapter {
 
     Context context;
-    ArrayList<Money> currList;
+    ArrayList<? extends Money> currList;
 
-    public MyAdapter(Context context, ArrayList<Money> currList) {
+    public MoneyAdapter(Context context, ArrayList<? extends Money> currList) {
         this.context = context;
         this.currList = currList;
     }

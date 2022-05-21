@@ -8,19 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import com.fragment.okhttp.Adapters.MyAdapter;
+import com.fragment.okhttp.Adapters.MoneyAdapter;
 import com.fragment.okhttp.Model.Crypto;
-import com.fragment.okhttp.Model.Currency;
-import com.fragment.okhttp.Model.Money;
 import com.fragment.okhttp.R;
 
 import java.util.ArrayList;
 
 public class CryptosFrgmnt extends Fragment {
-    private static ArrayList<Money> cryptoList;
+    private static ArrayList<Crypto> cryptoList;
     View frgView;
     ListView listView;
-    MyAdapter myAdapter;
+    MoneyAdapter moneyAdapter;
     /*
         // TODO: Rename parameter arguments, choose names that match
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,21 +60,19 @@ public class CryptosFrgmnt extends Fragment {
         return frgView;
     }
 
-    public static void setData(ArrayList<Money> arrayList){
-
+    public static void setData(ArrayList<Crypto> arrayList){
         cryptoList = arrayList;
-
     }
 
-    public ArrayList<Money> getData(){
+    public ArrayList<Crypto> getData(){
         return cryptoList;
     }
 
     public void configureListView() {
         listView=frgView.findViewById(R.id.listview2);
-        myAdapter = new MyAdapter(getActivity().getApplicationContext(), getData());
-        listView.setAdapter(myAdapter);
-        myAdapter.notifyDataSetChanged();
+        moneyAdapter = new MoneyAdapter(getActivity().getApplicationContext(), getData());
+        listView.setAdapter(moneyAdapter);
+        moneyAdapter.notifyDataSetChanged();
         Log.i("data", "LIST VIEW HAS BEEN BUILT FOR CRYPTOS RIGHT NOW");
         Log.i("data", getData().get(4).getCurrencyName());
     }

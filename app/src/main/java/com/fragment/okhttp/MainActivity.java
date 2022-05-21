@@ -5,27 +5,21 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.fragment.okhttp.Adapters.MyAdapter;
 import com.fragment.okhttp.Fragments.CryptosFrgmnt;
 import com.fragment.okhttp.Fragments.CurrenciesFrgmnt;
 import com.fragment.okhttp.Model.Crypto;
 import com.fragment.okhttp.Model.Currency;
-import com.fragment.okhttp.Model.Money;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -35,11 +29,9 @@ import okhttp3.ResponseBody;
 
 public class MainActivity extends AppCompatActivity {
 
-    public ArrayList<Money> currencyList = new ArrayList();
-    public ArrayList<Money> cryptoList = new ArrayList<>();
+    public ArrayList<Currency> currencyList = new ArrayList();
+    public ArrayList<Crypto> cryptoList = new ArrayList<>();
     JSONObject respObj;
-    //ListView listView;
-    //MyAdapter myadapter;
     TextView currencyText,cryptoText,goldText;
     private  OkHttpClient client = new OkHttpClient();
     private final String BASE_URL = "https://finans.apipara.com/json/v9//converter";
@@ -50,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
         listeners();
+        callClientResponse();
+    }
 
+    void callClientResponse(){
         Request get = new Request.Builder()
                 .url(BASE_URL)
                 .build();
@@ -68,47 +63,25 @@ public class MainActivity extends AppCompatActivity {
                     ResponseBody responseBody = response.body();
                     JSONObject jsonObject = new JSONObject(responseBody.string());
                     respObj = jsonObject.getJSONObject("response");
-                    //JSONArray currencies = respObj.getJSONArray("currency");
-                    //getCurrencyList(respObj);
-                    //Log.i("data", currencies.length() + "");
-/*
-                    for (int i = 0; i < currencies.length() - 1; i++) {
-                        JSONObject item = currencies.getJSONObject(i);
-//                        String currencyName = item.getString("code");
-//                        String currencyDesc = item.getString("shortName");
-//                        Double currencyValue = item.getDouble("buying");
-//                        Double cellRatio = item.getDouble("cell");
-//                        System.out.println("id: "+i+" : "+currencyName+" : "+currencyDesc+" : "+currencyValue+" : "+cellRatio);
-                        Log.i("data", item.getString("code") + " : " + item.getString("buying") + " : " + item.getString("selling") + " : " + item.getString("change_rate"));
-                        currencyList.add(new Currency(i,
-                                item.getString("code"),
-                                item.getDouble("buying"),
-                                item.getDouble("selling"),
-                                item.getDouble("change_rate")
-                        ));
-                    }
-*/
+                    Log.i("datas",respObj.length()+"");
                     if (!response.isSuccessful()) {
                         throw new IOException("Unexpected code " + response);
                     }
 
-                    //Log.i("data", responseBody.string());
-                    Log.i("data", "RESPONSE BODY");
-                    //Log.i("data", currencyList.get(1).getCurrencyName());
+                    Log.i("data", "RESPONSE BODY LOADED");
+                    showCurrencies();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
-        showList();
     }
 
-    private void showCurrencies() {
+    public void showCurrencies() {
         getCurrencyList(respObj);
         CurrenciesFrgmnt.setData(currencyList);
         CurrenciesFrgmnt currenciesFrgmnt = new CurrenciesFrgmnt();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        //transaction.add(R.id.fragmentBox,currenciesFrgmnt).commit();
         transaction.replace(R.id.fragmentBox,currenciesFrgmnt).commit();
         changeTextColor(currencyText);
     }
@@ -118,13 +91,13 @@ public class MainActivity extends AppCompatActivity {
         CryptosFrgmnt.setData(cryptoList);
         CryptosFrgmnt cryptosFrgmnt = new CryptosFrgmnt();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        //transaction.add(R.id.fragmentBox,cryptosFrgmnt).commit();
         transaction.replace(R.id.fragmentBox,cryptosFrgmnt).commit();
         changeTextColor(cryptoText);
     }
 
     private void showGolds() {
         changeTextColor(goldText);
+        Toast.makeText(getApplicationContext(), "This Fragment not added",Toast.LENGTH_SHORT).show();
     }
 
     void changeTextColor(TextView textView){
@@ -170,30 +143,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-/*
-    public void configureListView() {
-        //listView=findViewById(R.id.listview);
-        myadapter = new MyAdapter(MainActivity.this, currencyList);
-        listView.setAdapter(myadapter);
-        myadapter.notifyDataSetChanged();
-        Log.i("data", "LIST VIEW HAS BEEN BUILT RIGHT NOW");
-    }
-*/
-    void showList() {
+    void showListWithDelay() {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                //configureListView();
                 Log.i("data", "DATA SENT TO FRAGMENT....");
-                //showCurrencies();
-                //Log.i("data", currencyList.get(0).getCurrencyName());
-                showCryptos();
+                showCurrencies();
             }
-        }, 5000); // After 3 seconds
+        }, 4000); // After 3 seconds
     }
 
-    ArrayList<Money> getCurrencyList(JSONObject responseObj){
+    ArrayList<Currency> getCurrencyList(JSONObject responseObj){
         JSONArray currencies = null;
         try {
             currencies = responseObj.getJSONArray("currency");
@@ -212,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         return currencyList;
     }
 
-    ArrayList<Money> getCryptoList(JSONObject responseObj){
+    ArrayList<Crypto> getCryptoList(JSONObject responseObj){
         JSONArray cryptos = null;
         try {
             cryptos = responseObj.getJSONArray("coin");

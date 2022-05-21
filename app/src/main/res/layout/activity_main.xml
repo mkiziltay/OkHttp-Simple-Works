@@ -15,28 +15,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginRight="10dp"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="24dp"
             android:textStyle="bold"
-            android:text="Currencies"/>
+            android:text="Currency"/>
         <TextView
             android:id="@+id/cryp_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="24dp"
             android:textStyle="bold"
-            android:text="Cryptos"/>
+            android:text="Coin"/>
         <TextView
             android:id="@+id/gold_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="24dp"
             android:textStyle="bold"
-            android:text="Golds"/>
+            android:text="Gold"/>
     </LinearLayout>
 
     <androidx.fragment.app.FragmentContainerView

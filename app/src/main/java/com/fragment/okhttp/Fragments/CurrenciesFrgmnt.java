@@ -1,30 +1,22 @@
 package com.fragment.okhttp.Fragments;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.ListFragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
-
-import com.fragment.okhttp.Adapters.MyAdapter;
-import com.fragment.okhttp.MainActivity;
+import com.fragment.okhttp.Adapters.MoneyAdapter;
 import com.fragment.okhttp.Model.Currency;
-import com.fragment.okhttp.Model.Money;
 import com.fragment.okhttp.R;
-
 import java.util.ArrayList;
 
 public class CurrenciesFrgmnt extends Fragment {
-    private static ArrayList<Money> currencyList;
+    private static ArrayList<Currency> currencyList;
     View frgView;
     ListView listView;
-    MyAdapter myAdapter;
+    MoneyAdapter moneyAdapter;
 /*
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -63,24 +55,22 @@ public class CurrenciesFrgmnt extends Fragment {
         frgView = inflater.inflate(R.layout.fragment_currencies, container, false);
 
         configureListView();
-        //container.addView(listView);
         return frgView;
     }
 
-    public static void setData(ArrayList<Money> arrayList){
-        //currencyList = new ArrayList<>();
+    public static void setData(ArrayList<Currency> arrayList){
         currencyList = arrayList;
     }
 
-    public ArrayList<Money> getData(){
+    public ArrayList<Currency> getData(){
         return currencyList;
     }
 
     public void configureListView() {
         listView=frgView.findViewById(R.id.listview);
-        myAdapter = new MyAdapter(getActivity().getApplicationContext(), getData());
-        listView.setAdapter(myAdapter);
-        myAdapter.notifyDataSetChanged();
+        moneyAdapter = new MoneyAdapter(getActivity().getApplicationContext(), getData());
+        listView.setAdapter(moneyAdapter);
+        moneyAdapter.notifyDataSetChanged();
         Log.i("data", "LIST VIEW HAS BEEN BUILT RIGHT NOW");
         Log.i("data", getData().get(4).getCurrencyName());
     }
