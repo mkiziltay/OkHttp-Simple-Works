@@ -7,10 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.fragment.okhttp.Fragments.CryptosFrgmnt;
 import com.fragment.okhttp.Fragments.CurrenciesFrgmnt;
 import com.fragment.okhttp.Model.Crypto;

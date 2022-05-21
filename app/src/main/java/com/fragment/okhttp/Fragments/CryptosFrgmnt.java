@@ -11,7 +11,6 @@ import android.widget.ListView;
 import com.fragment.okhttp.Adapters.MoneyAdapter;
 import com.fragment.okhttp.Model.Crypto;
 import com.fragment.okhttp.R;
-
 import java.util.ArrayList;
 
 public class CryptosFrgmnt extends Fragment {

@@ -6,14 +6,6 @@ public abstract class Money {
     private Double currencyBuy;
     private Double currencySelling;
     private Double getCurrencyChange;
-//      We create Contructor in our subclasses
-//    public Money(int id, String currencyName, Double currencyBuy, Double currencySelling, Double getCurrencyChange) {
-//        this.id = id;
-//        this.currencyName = currencyName;
-//        this.currencyBuy = currencyBuy;
-//        this.currencySelling = currencySelling;
-//        this.getCurrencyChange = getCurrencyChange;
-//    }
 
     abstract int getId();
 
