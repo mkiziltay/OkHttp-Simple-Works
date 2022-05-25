@@ -7,25 +7,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.fragment.okhttp.Adapters.MyAdapter;
 import com.fragment.okhttp.Fragments.CryptosFrgmnt;
 import com.fragment.okhttp.Fragments.CurrenciesFrgmnt;
 import com.fragment.okhttp.Model.Crypto;
 import com.fragment.okhttp.Model.Currency;
 import com.fragment.okhttp.Model.Money;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
